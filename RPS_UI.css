@@ -1,0 +1,22 @@
+#rock {
+    background-color: blue;
+    color: wheat;
+
+}
+
+.whole {
+    display: flex;
+    justify-content: center;
+}
+
+.left {
+    display: flex;
+}
+
+.right {
+    display: flex;
+}
+
+#buttons {
+    justify-content: space-between;
+}
