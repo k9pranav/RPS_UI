@@ -1,6 +1,44 @@
-// The actual game code from RockPaperScissors file
+const buttons = document.querySelector("#buttons");
 
-//Selects a random choice for the computer
+const rock = document.createElement('button');
+rock.textContent = "Rock";
+rock.setAttribute('id', 'option')
+
+const paper = document.createElement('button');
+paper.setAttribute('id', "option")
+paper.textContent = "Paper";
+
+const scissors = document.createElement('button');
+scissors.setAttribute("id", "option")
+scissors.textContent = 'Scissors';
+
+buttons.appendChild(rock);
+buttons.appendChild(paper);
+buttons.appendChild(scissors);
+
+const theResult = document.createElement('p');
+theResult.textContent = 'The Result: ';
+document.body.appendChild(theResult);
+
+let computerScore = 0;
+let playerScore = 0;
+
+const computerScoreButton = document.createElement('p');
+computerScoreButton.textContent = "Computer Score";
+document.body.appendChild(computerScoreButton);
+
+const computerScoreShow = document.createElement('p');
+computerScoreShow.innerHTML = String(computerScore);
+document.body.appendChild(computerScoreShow);
+
+const playerScoreButton = document.createElement('p');
+playerScoreButton.textContent = "Player Score";
+document.body.appendChild(playerScoreButton);
+
+const playerScoreShow = document.createElement('p');
+playerScoreShow.innerHTML = String(playerScore);
+document.body.appendChild(playerScoreShow);
+
 function getComputerChoice() {
     
     const options = ["Rock", 'Paper', "Scissors"];
@@ -10,24 +48,25 @@ function getComputerChoice() {
     return options[RandomPick]
 }
 
-//The function tells who won. 
-
 function playRound(playerSelection, computerSelection) {
     // Case 1. Player Chooses Rock
     if (playerSelection.toLowerCase() == 'rock'){
         
         if (computerSelection == 'Paper') {
             computerScore += 1;
-            return ('Computer Won! Your score is ' +  playerScore + ' and computer score is ' + computerScore)
+            theResult.textContent = 'Computer Won!';
+            computerScoreShow.innerHTML = computerScore;
+
         }
 
         else if (computerSelection == 'Scissors') {
             playerScore += 1;
-            return ("Player Won! Your score is " +  playerScore + ' and computer score is ' + computerScore)
+            theResult.textContent = "Player Won!";
+            playerScoreShow.innerHTML = playerScore;
         }
 
         else {
-            return "It's a Tie!"
+            theResult.textContent = "It's a Tie!";
         }
 
     }
@@ -37,16 +76,18 @@ function playRound(playerSelection, computerSelection) {
         
         if (computerSelection == 'Scissors') {
             computerScore += 1;
-            return ('Computer Won! Your score is ' +  playerScore + ' and computer score is ' + computerScore)
+            theResult.textContent = 'Computer Won!';
+            computerScoreShow.innerHTML = computerScore;
         }
 
         else if (computerSelection == 'Rock') {
             playerScore += 1;
-            return("Player Won! Your score is " +  playerScore + ' and computer score is ' + computerScore)
+            theResult.textContent = 'Player Won!';
+            playerScoreShow.innerHTML = playerScore;
         }
 
         else {
-            return "It's a Tie!"
+            theResult.textContent = "It's a Tie!";
         }
 
     }
@@ -56,16 +97,18 @@ function playRound(playerSelection, computerSelection) {
         
         if (computerSelection == 'Rock') {
             computerScore += 1;
-            return('Computer Won! Your score is ' +  playerScore + ' and computer score is ' + computerScore)
+            theResult.textContent = 'Computer Won!';
+            computerScoreShow.innerHTML = computerScore;
         }
 
         else if (computerSelection == 'Paper') {
             computerScore += 1;
-            return("Player Won! Your score is " +  playerScore + ' and computer score is ' + computerScore)
+            theResult.textContent = 'Player Won!';
+            playerScoreShow.innerHTML = playerScore;
         }
 
         else {
-            return "It's a Tie!"
+            theResult.textContent = "It's a Tie!";
         }
 
     }
@@ -79,94 +122,21 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-function game(){
-    while (playerScore <= 5 || computerScore <= 5){
-        if (playerScore == 5) {
-            return "Player Won"
-        }
+let playerSelection = new String();
 
-        else if (computerScore == 5) {
-            return "Computer Won"
-        }
+rock.addEventListener('click', function(e) {
+    let computerChoice = getComputerChoice();
+    playRound(this.textContent, computerChoice);
+})
 
-        else {
-            let playerSelection = this.textContent;
-            let computerSelection = getComputerChoice();
-            playerScorebtn.innerHTML = "The computer picked: " + computerSelection + playRound(playerSelection, computerSelection);
-        }
+paper.addEventListener('click', function(e) {
+    let computerChoice = getComputerChoice();
+    playRound(this.textContent, computerChoice);
+})
 
-    }    
-}
-
-
-const buttons = document.querySelector("#buttons");
-
-const rock = document.createElement('button');
-rock.textContent = "Rock";
-rock.setAttribute('id', 'button')
-
-const paper = document.createElement('button');
-paper.setAttribute('id', "button")
-paper.textContent = "Paper";
-
-const scissors = document.createElement('button');
-scissors.setAttribute("id", "button")
-scissors.textContent = 'Scissors';
-
-buttons.appendChild(rock);
-buttons.appendChild(paper);
-buttons.appendChild(scissors);
-
-// const playerScorebtn = document.querySelector('#playerScore');
-// const compScorebtn = document.querySelector('#computerScore');
-
-// let playerScore = 0;
-// let compScore = 0;
-
-const playerScorebtn = document.createElement('p');
-playerScorebtn.setAttribute('id', 'playerScore');
-buttons.appendChild(playerScorebtn)
-
-let playerScore = 0;
-let computerScore = 0;
-
-console.log(playerScore);
-console.log(computerScore);
-
-//The code below: When I click a button, it console logs the textContent of the button. I can set it to the player choice.
-
-if (computerScore == 5){
-    playerScorebtn.innerHTML = "The Player Won!";
-} else if (computerScore == 5){
-    playerScorebtn.innerHTML = "The Computer Won!";
-} else {
-    document.querySelectorAll("#button").forEach(b => b.addEventListener('click', function(e){
-        let playerSelection = this.textContent;
-        let computerSelection = getComputerChoice();
-        playerScorebtn.innerHTML = "The computer picked: " + computerSelection + ". " + playRound(playerSelection, computerSelection);
-    } ) )
-}
-
-
-
-// document.querySelectorAll('#button').forEach(b => b.addEventListener('click', function(e) {  
-    
-//    let playerSelection = this.textContent;
-//    let computerSelection = getComputerChoice();
-
-//    if (playerScore == 5){
-//        playerScorebtn.innerHTML = "The Player Won!";
-//    } else if (computerScore == 5){
-//        playerScorebtn.innerHTML = "The Computer Won!";
-//    } else{
-
-//        playerScorebtn.innerHTML = "The computer picked: " + computerSelection + ". " + playRound(playerSelection, computerSelection);
-//    }
-    
-
-//}));
-
-
-// playerScorebtn.textContent = playerScore;
+scissors.addEventListener('click', function(e) {
+    let computerChoice = getComputerChoice();
+    playRound(this.textContent, computerChoice);
+})
 
 
