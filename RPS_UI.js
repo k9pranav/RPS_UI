@@ -49,6 +49,7 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+    
     // Case 1. Player Chooses Rock
     if (playerSelection.toLowerCase() == 'rock'){
         
@@ -112,31 +113,57 @@ function playRound(playerSelection, computerSelection) {
         }
 
     }
-
-    //Case 4. Player puts something Random
-
-    else {
-        return "Invalid Input"
-    }
-
-
 }
 
 let playerSelection = new String();
 
-rock.addEventListener('click', function(e) {
-    let computerChoice = getComputerChoice();
-    playRound(this.textContent, computerChoice);
-})
+function game(playerSelection){
+    
 
-paper.addEventListener('click', function(e) {
-    let computerChoice = getComputerChoice();
-    playRound(this.textContent, computerChoice);
-})
+    if (computerScore <= 4| playerScore <= 4){
+        computerSelection = getComputerChoice()
+        playRound(playerSelection, computerSelection);
 
-scissors.addEventListener('click', function(e) {
-    let computerChoice = getComputerChoice();
-    playRound(this.textContent, computerChoice);
-})
+        if (computerScore >= 5){
+            computerScoreShow.innerHTML = 5;
+            playerScoreShow.innerHTML = "--";
+            theResult.textContent = "The Computer Won the Game!"
+            this.removeEventListener('click', game(this.textContent))
+        } else if (playerScore >= 5){
+            computerScoreShow.innerHTML = "--";
+            playerScoreShow.innerHTML = 5;
+            theResult.textContent = "The Player Won the Game!"
+            this.removeEventListener('click', game(this.textContent))
+
+        } else {}
+
+        
+    } else {}
+    
+}
+
+/* if (computerScore >= 5| playerScore >= 5){
+        if (computerScore >= 5){
+            computerScoreShow.innerHTML = 5;
+            playerScoreShow.innerHTML = "--"
+            theResult.textContent = 'The Computer Won the Game!'
+        } else{
+            playerScoreShow.innerHTML = 5;
+            playerScoreShow.innerHTML = "--";
+        }
+    } else{}
+*/
+
+rock.addEventListener('click', function () {game(this.textContent)})
+
+paper.addEventListener('click', function() {game(this.textContent)})
+
+scissors.addEventListener('click', function() {game(this.textContent)})
+
+
+
+
+
+
 
 
